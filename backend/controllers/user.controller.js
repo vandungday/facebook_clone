@@ -1,10 +1,11 @@
-exports.home = (req, res) => {
-  res.status(200).json({
-    status: "succes",
-    message: "hello world",
-  });
-};
+const User = require("../models/User");
+const catchAsync = require("../utils/catchAsync");
 
-exports.books = (req, res) => {
-  res.send("BOOKS");
-};
+exports.createUser = catchAsync(async (req, res, next) => {
+  const newUser = await User.create(req.body);
+
+  res.status(201).json({
+    status: "success",
+    user: newUser,
+  });
+});
