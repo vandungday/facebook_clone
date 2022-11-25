@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
-const validator = require("validator");
-const bcrypt = require("bcrypt");
+const validator = require('validator');
+const bcrypt = require('bcrypt');
 const userSchema = mongoose.Schema(
   {
     first_name: {
       type: String,
-      required: [true, "first name is required"],
+      required: [true, 'first name is required'],
       trim: true,
       text: true,
       minlength: 3,
@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema(
     },
     last_name: {
       type: String,
-      required: [true, "last name is required"],
+      required: [true, 'last name is required'],
       trim: true,
       text: true,
       minlength: 3,
@@ -22,30 +22,30 @@ const userSchema = mongoose.Schema(
     },
     username: {
       type: String,
-      required: [true, "username is required"],
+      required: [true, 'username is required'],
       trim: true,
       text: true,
       unique: true,
     },
     email: {
       type: String,
-      required: [true, "email is required"],
+      required: [true, 'email is required'],
       trim: true,
       lowercase: true,
       unique: true,
-      validate: [validator.isEmail, "please provide a valid email"],
+      validate: [validator.isEmail, 'please provide a valid email'],
     },
     password: {
       type: String,
-      required: [true, "password is required"],
+      required: [true, 'password is required'],
       minlength: 6,
-      select: false,
+      // select: false,
     },
     picture: {
       type: String,
       trim: true,
       default:
-        "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png",
+        'https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png',
     },
     cover: {
       type: String,
@@ -53,7 +53,7 @@ const userSchema = mongoose.Schema(
     },
     gender: {
       type: String,
-      required: [true, "gender is required"],
+      required: [true, 'gender is required'],
       trim: true,
     },
     bYear: {
@@ -95,7 +95,7 @@ const userSchema = mongoose.Schema(
       {
         user: {
           type: ObjectId,
-          ref: "User",
+          ref: 'User',
         },
       },
     ],
@@ -126,7 +126,7 @@ const userSchema = mongoose.Schema(
       },
       relationship: {
         type: String,
-        enum: ["Single", "In a relationship", "Married", "Divorced"],
+        enum: ['Single', 'In a relationship', 'Married', 'Divorced'],
       },
       instagram: {
         type: String,
@@ -136,7 +136,7 @@ const userSchema = mongoose.Schema(
       {
         post: {
           type: ObjectId,
-          ref: "Post",
+          ref: 'Post',
         },
         saveAt: {
           type: Date,
@@ -150,11 +150,18 @@ const userSchema = mongoose.Schema(
   }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
 
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
 
-module.exports = mongoose.model("User", userSchema);
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+module.exports = mongoose.model('User', userSchema);
