@@ -83,14 +83,14 @@ a {
   right: 0;
   background: rgba(255, 255, 255, 0.768);
   bottom: 0;
-  z-index: 99;
+  z-index: 1;
 }
 
 /*----Buttons----*/
 
 /*-----Hovers-----*/
 .hover1:hover {
-  background: var(--bg-third);
+  background: var(--bg-secondary);
 }
 
 .hover2:hover {

@@ -92,7 +92,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.activateAccount = async (req, res, next) => {
+exports.activateAccount = asyncHandler(async (req, res, next) => {
   try {
     const { token } = req.body;
     const validUser = req.user.id;
@@ -115,7 +115,7 @@ exports.activateAccount = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+});
 
 exports.login = asyncHandler(async (req, res, next) => {
   try {
