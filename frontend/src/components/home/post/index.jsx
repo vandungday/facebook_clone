@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Feeling, LiveVideo, Photo } from "../../../svg";
 import "./style.scss";
 
-const CreatePost = ({ user }) => {
+const CreatePost = ({ user, setVisible }) => {
   return (
     <>
       <div className="createPost">
@@ -11,7 +11,12 @@ const CreatePost = ({ user }) => {
           <Link to="/profile">
             <img src={user?.picture} alt="" />
           </Link>
-          <div className="open_post hover2">
+          <div
+            className="open_post hover2"
+            onClick={() => {
+              setVisible(true);
+            }}
+          >
             {user?.first_name} ơi, bạn đang nghĩ gì thế?
           </div>
         </div>

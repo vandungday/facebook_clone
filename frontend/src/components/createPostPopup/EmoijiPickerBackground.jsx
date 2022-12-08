@@ -1,14 +1,11 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EmojiPicker from "emoji-picker-react";
-import { useRef } from "react";
 
 const EmoijiPickerBackground = ({
   text,
   setText,
   user,
   type2,
-  background,
   setBackground,
 }) => {
   const [picker, setPicker] = useState(false);
@@ -16,10 +13,10 @@ const EmoijiPickerBackground = ({
   const [cursorPosition, setCursorPosition] = useState();
   const textRef = useRef(null);
   const bgRef = useRef(null);
+
   /** Resize Post TextArea Start */
   const useAutosizeTextArea = (textAreaRef, value) => {
     useEffect(() => {
-      console.log(Math.abs(textRef.current.value.length * 0.1 - 32));
       if (textAreaRef && textAreaRef?.current) {
         (textAreaRef.current || {}).style.height = "0px";
         const scrollHeight = (textAreaRef.current || {}).scrollHeight;
@@ -75,18 +72,10 @@ const EmoijiPickerBackground = ({
       <div className={!type2 && "flex_center"} ref={bgRef}>
         <textarea
           ref={textRef}
-          // maxLength="100"
           value={text}
           placeholder={`${user?.first_name} ơi, bạn đang nghĩ gì thế?`}
           className={`post_input ${type2 && "input2"}`}
           onChange={(e) => setText(e.target.value)}
-          style={{
-            paddingTop: `${
-              background
-                ? Math.abs(textRef.current.value.length * 0.1 - 32)
-                : "0"
-            }%`,
-          }}
         ></textarea>
       </div>
       <div className="post_emojis_wrap">

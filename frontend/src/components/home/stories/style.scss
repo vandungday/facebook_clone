@@ -50,9 +50,11 @@
 .story_create_text {
     color: #000;
     position: absolute;
-    left: 20%;
+    width: 100%;
+    text-align: center;
     top: 87%;
     font-size: 12px;
+    font-weight: 600;
 }
 
 .story {
@@ -78,13 +80,13 @@
 
 .story_profile_pic {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 50px;
-    height: 50px;
+    left: 8px;
+    top: 8px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--blue-color);
+    border: 4px solid var(--blue-color);
 }
 
 .story_profile_pic img {
@@ -101,7 +103,8 @@
     word-break: break-word;
     width: 100px;
     color: #fff;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600;
     padding-left: 10px;
 }
 
