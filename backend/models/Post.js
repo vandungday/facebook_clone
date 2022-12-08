@@ -25,7 +25,7 @@ const postSchema = new Schema(
     },
     comments: [
       {
-        comments: {
+        comment: {
           type: String,
         },
         image: {
