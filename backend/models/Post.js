@@ -15,6 +15,9 @@ const postSchema = new Schema(
     images: {
       type: Array,
     },
+    videos: {
+      type: Array,
+    },
     user: {
       type: ObjectId,
       ref: 'User',

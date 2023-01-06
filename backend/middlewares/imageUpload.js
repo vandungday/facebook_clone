@@ -5,6 +5,7 @@ module.exports = async function (req, res, next) {
       return res.status(400).json({ message: 'No files selected.' });
     }
     let files = Object.values(req.files).flat();
+
     files.forEach((file) => {
       if (
         file.mimetype !== 'image/jpeg' &&
